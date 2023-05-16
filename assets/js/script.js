@@ -1,19 +1,17 @@
 // Assignment code here
-
-
-//Prompt for password length
 function generatePassword(passwordLength, yesLowCase, yesUpCase, yesNum, yesSpecial) {
   // Defines characterset arrays
-  var lowerCaseChar = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-  var upperCaseChar = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-  var numericChar = ["0","1","2","3","4","5","6","7","8","9"];
-  var specialChar = ["!","@","#","$","%","^","&","*","(",")","'","_","+","{","|",":","<",">","?","-","=",".","/"]
-
+  var lowcasstri = "abcdefghijklmnopqrstuvwxyz";
+  var upcasstri = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var numstri = "0123456789";
+  var specialstri = "!@#$%^&*()_+-={}|:?-=,./";
+  
   // Variable for chosen characters, will concatenate with function for confirmed charactersets
-  var chosenChar = [];
+  var chosenstri = "";
 
-  var passwordLength = prompt("How many characters long would you like your password to be? (Must be between 8 and 128 characters long)")
-
+  //Prompt for password length
+  var passwordLength = prompt("How many characters long would you like your password to be? (Must be between 8 and 128 characters long!)")
+ 
   if (passwordLength < 8 || passwordLength > 128) {
     alert("Password must be between 8 and 128 characters long! Try Again!");
     return;
@@ -30,25 +28,28 @@ function generatePassword(passwordLength, yesLowCase, yesUpCase, yesNum, yesSpec
   var yesSpecial = confirm("Click OK if you would like to include special characters in your password!")
 
   if (yesLowCase) {
-    chosenChar.push(lowerCaseChar)
+    chosenstri += lowcasstri
   };
   if (yesUpCase) {
-    chosenChar.push(upperCaseChar)
+    chosenstri += upcasstri
   };
   if (yesNum) {
-    chosenChar.push(numericChar)
+    chosenstri += numstri
   };
   if (yesSpecial) {
-    chosenChar.push(specialChar)
+    chosenstri += specialstri
   };
-  if (!yesLowCase && !yesLowCase && !yesNum && !yesSpecial) {
+  if (!yesLowCase && !yesUpCase && !yesNum && !yesSpecial) {
     alert("Please select at least one set of characters for your password! Try Again!")
   };
 
-  console.log(chosenChar)
-  // for (var i=0, i < passwordLength, i++) {
-  //   password.concat(chosenChar.at(math.floor(math.random()*chosenChar.length)))
-  // }
+  var finalCharSet = chosenstri.split("")
+
+  var password = "";
+  for (var i=0; i<passwordLength; i++) {
+  password += finalCharSet.at(Math.floor(Math.random()*finalCharSet.length))
+}
+return password;
 };
 
 
@@ -64,11 +65,6 @@ function writePassword() {
   passwordText.value = password;
 };
 
-// hypothetical for loop for generating password
-/* for (var i=0, i < passwordLength, i++) {
-  password.concat(chosenChar.At(Math.floor(Math.random()*chosenChar.Length)));
-}
-*/
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
